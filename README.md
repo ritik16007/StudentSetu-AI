@@ -48,3 +48,6 @@ This project is built to solve real problems faced by students during college ad
 ## Created By
 
 Ritik Kumar Parida
+## Live Demo
+
+[Click here to view StudentSetu AI](https://student-setu-ai.vercel.app)
