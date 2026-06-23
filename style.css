@@ -332,3 +332,17 @@ button:hover {
 .import-box {
   margin-top: 18px;
 }
+.login-link {
+  display: inline-block;
+  margin-top: 15px;
+  background: white;
+  color: #2563eb;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link:hover {
+  background: #f3f4f6;
+}

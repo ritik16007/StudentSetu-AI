@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>StudentSetu AI</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <h1>StudentSetu AI</h1>
+      <p>Your student documents, deadlines and college work in one place.</p>
+
+      <a href="login.html" class="login-link">Login / Signup</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Intro Section -->
+    <section class="section-box intro-box">
+      <h2>Welcome to StudentSetu AI 👋</h2>
+      <p>
+        StudentSetu AI helps students manage important documents, deadlines,
+        formal emails, and loan or scholarship applications in one simple dashboard.
+      </p>
+    </section>
+
+    <!-- Dashboard Cards -->
+    <section class="dashboard">
+      <div class="card">
+        <h3>My Documents</h3>
+        <p id="docCount">0 documents added</p>
+      </div>
+
+      <div class="card">
+        <h3>Deadlines</h3>
+        <p id="deadlineCount">0 deadlines added</p>
+      </div>
+
+      <div class="card">
+        <h3>Mail Draft Generator</h3>
+        <p>Create formal mails for school, college and bank.</p>
+      </div>
+
+      <div class="card">
+        <h3>Loan / Scholarship Tracker</h3>
+        <p id="applicationCount">0 applications added</p>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="section-box">
+      <h2>Search Records</h2>
+
+      <div class="form-group">
+        <label>Search Anything</label>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search marksheet, loan, scholarship, deadline..."
+        />
+      </div>
+
+      <div class="filter-buttons">
+        <button type="button" onclick="setFilter('all')">All</button>
+        <button type="button" onclick="setFilter('pending')">Pending</button>
+        <button type="button" onclick="setFilter('urgent')">Urgent</button>
+        <button type="button" onclick="setFilter('submitted')">Submitted</button>
+        <button type="button" onclick="setFilter('hardcopy')">Need Hard Copy</button>
+      </div>
+    </section>
+
+    <!-- Add Document -->
+    <section class="section-box">
+      <h2>Add Document</h2>
+
+      <form id="documentForm">
+        <div class="form-group">
+          <label>Document Name</label>
+          <input
+            type="text"
+            id="docName"
+            placeholder="Example: Class 12 Marksheet"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Document Type</label>
+          <select id="docType" required>
+            <option value="">Select Type</option>
+            <option value="Academic">Academic</option>
+            <option value="Identity">Identity</option>
+            <option value="Loan">Loan</option>
+            <option value="Scholarship">Scholarship</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select id="docStatus" required>
+            <option value="">Select Status</option>
+            <option value="Available">Available</option>
+            <option value="Applied">Applied</option>
+            <option value="Pending">Pending</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Need Hard Copy">Need Hard Copy</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea
+            id="docNotes"
+            placeholder="Write short note..."
+          ></textarea>
+        </div>
+
+        <button type="submit">Add Document</button>
+      </form>
+    </section>
+
+    <!-- Document List -->
+    <section class="section-box">
+      <h2>My Documents</h2>
+
+      <div id="documentList" class="document-list">
+        <!-- Documents will show here -->
+      </div>
+    </section>
+
+    <!-- Add Deadline -->
+    <section class="section-box">
+      <h2>Add Deadline</h2>
+
+      <form id="deadlineForm">
+        <div class="form-group">
+          <label>Task Name</label>
+          <input
+            type="text"
+            id="taskName"
+            placeholder="Example: Migration certificate follow-up"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Due Date</label>
+          <input type="date" id="dueDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>Priority</label>
+          <select id="priority" required>
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Urgent">Urgent</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select id="taskStatus" required>
+            <option value="">Select Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <button type="submit">Add Deadline</button>
+      </form>
+    </section>
+
+    <!-- Deadline List -->
+    <section class="section-box">
+      <h2>My Deadlines</h2>
+
+      <div id="deadlineList" class="document-list">
+        <!-- Deadlines will show here -->
+      </div>
+    </section>
+
+    <!-- Mail Draft Generator -->
+    <section class="section-box">
+      <h2>Mail Draft Generator</h2>
+
+      <form id="mailForm">
+        <div class="form-group">
+          <label>Mail Type</label>
+          <select id="mailType" required>
+            <option value="">Select Mail Type</option>
+            <option value="migration">Migration Certificate Request</option>
+            <option value="marksheet">Marksheet Update Request</option>
+            <option value="loan">Education Loan Follow-up</option>
+            <option value="scholarship">Scholarship Query</option>
+            <option value="custom">Custom Mail</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Receiver Name / Department</label>
+          <input
+            type="text"
+            id="receiverName"
+            placeholder="Example: Admission Department"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Institution / Bank Name</label>
+          <input
+            type="text"
+            id="institutionName"
+            placeholder="Example: Lovely Professional University"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Your Issue / Requirement</label>
+          <textarea
+            id="mailIssue"
+            placeholder="Write your issue in short..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Example: Ritik Kumar Parida"
+            required
+          />
+        </div>
+
+        <button type="submit">Generate Mail</button>
+      </form>
+    </section>
+
+    <!-- Generated Mail -->
+    <section class="section-box">
+      <h2>Generated Mail</h2>
+
+      <div id="mailOutput" class="mail-output">
+        <p class="empty-message">Your generated mail will appear here.</p>
+      </div>
+
+      <button type="button" id="copyMailBtn" class="copy-btn">Copy Mail</button>
+    </section>
+
+    <!-- Add Loan / Scholarship Application -->
+    <section class="section-box">
+      <h2>Add Loan / Scholarship Application</h2>
+
+      <form id="applicationForm">
+        <div class="form-group">
+          <label>Application Name</label>
+          <input
+            type="text"
+            id="appName"
+            placeholder="Example: PM Vidyalakshmi Education Loan"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Platform / Bank / Organization</label>
+          <input
+            type="text"
+            id="appPlatform"
+            placeholder="Example: SBI Guna Branch"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Application ID</label>
+          <input
+            type="text"
+            id="appId"
+            placeholder="Example: PVL123456"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Current Status</label>
+          <select id="appStatus" required>
+            <option value="">Select Status</option>
+            <option value="Applied">Applied</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Verification Pending">Verification Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Need Follow-up">Need Follow-up</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Next Action</label>
+          <textarea
+            id="nextAction"
+            placeholder="Example: Follow up with bank manager"
+          ></textarea>
+        </div>
+
+        <button type="submit">Add Application</button>
+      </form>
+    </section>
+
+    <!-- Application List -->
+    <section class="section-box">
+      <h2>My Loan / Scholarship Applications</h2>
+
+      <div id="applicationList" class="document-list">
+        <!-- Applications will show here -->
+      </div>
+    </section>
+
+    <!-- Export / Import Data -->
+    <section class="section-box">
+      <h2>Export / Import Data</h2>
+      <p>You can print, export, or import your complete student record data.</p>
+
+      <button type="button" onclick="printSummary()">Print Summary</button>
+      <button type="button" onclick="exportJSON()">Export as JSON</button>
+
+      <div class="form-group import-box">
+        <label>Import JSON Backup</label>
+        <input type="file" id="importFile" accept=".json" />
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Ritik Kumar Parida</p>
+    <p>StudentSetu AI - A student productivity project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
